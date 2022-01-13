@@ -76,6 +76,7 @@ export const Header = () => {
         <Input.Search
           className={styles["search-input"]}
           placeholder="请输入旅游目的地、主题或关键字"
+          onSearch={(keywords: string) => history.push("/search/" + keywords)}
         />
       </Layout.Header>
 
