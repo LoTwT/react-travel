@@ -13,29 +13,17 @@ import sideImage2 from "../../assets/images/sider_2019_02-04.png"
 import sideImage3 from "../../assets/images/sider_2019_02-04-2.png"
 import styles from "./HomePage.module.css"
 import { withTranslation, WithTranslation } from "react-i18next"
-import axios from "axios"
 import { connect } from "react-redux"
 import { RootState } from "../../redux/store"
-import { Dispatch } from "redux"
-import {
-  fetchRecommendProductsFailActionCreator,
-  fetchRecommendProductsStartActionCreator,
-  fetchRecommendProductsSuccessActionCreator,
-} from "../../redux/recommendProducts/recommendProductsActions"
+import { giveMeDataActionCreator } from "../../redux/recommendProducts/recommendProductsActions"
 
 type PropsType = WithTranslation &
   ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapActionToProps>
 
 class _HomePage extends React.Component<PropsType> {
-  async componentDidMount() {
-    try {
-      this.props.fetchStart()
-      const { data } = await axios.get("/v1/productCollections")
-      this.props.fetchSuccess(data)
-    } catch (error: any) {
-      this.props.fetchFail(error.message)
-    }
+  componentDidMount() {
+    this.props.giveMeData()
   }
 
   render() {
@@ -121,12 +109,8 @@ const mapStateToProps = (state: RootState) => ({
   productList: state.recommendProducts.productList,
 })
 
-const mapActionToProps = (dispatch: Dispatch) => ({
-  fetchStart: () => dispatch(fetchRecommendProductsStartActionCreator()),
-  fetchSuccess: (data: any) =>
-    dispatch(fetchRecommendProductsSuccessActionCreator(data)),
-  fetchFail: (error: any) =>
-    dispatch(fetchRecommendProductsFailActionCreator(error)),
+const mapActionToProps = (dispatch: any) => ({
+  giveMeData: () => dispatch(giveMeDataActionCreator()),
 })
 
 export const HomePage = connect(
