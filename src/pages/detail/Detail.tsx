@@ -15,7 +15,10 @@ import {
 import styles from "./Detail.module.css"
 import { Header, Footer, ProductIntro, ProductComments } from "../../components"
 import { commentMockData } from "./mockup"
-import { productDetailSlice } from "../../redux/productDetail/slice"
+import {
+  productDetailSlice,
+  getProductDetail,
+} from "../../redux/productDetail/slice"
 import { useSelector } from "../../redux/hooks"
 import { useDispatch } from "react-redux"
 
@@ -37,27 +40,28 @@ export const Detail: React.FC<RouteComponentProps<MatchParams>> = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const fetchData = async () => {
-      // try {
-      //   setLoading(true)
-      //   const { data } = await axios.get(`/v1/touristRoutes/${touristRouteId}`)
-      //   setProduct(data)
-      // } catch (error: any) {
-      //   setError(error.message)
-      // } finally {
-      //   setLoading(false)
-      // }
+    // const fetchData = async () => {
+    //   // try {
+    //   //   setLoading(true)
+    //   //   const { data } = await axios.get(`/v1/touristRoutes/${touristRouteId}`)
+    //   //   setProduct(data)
+    //   // } catch (error: any) {
+    //   //   setError(error.message)
+    //   // } finally {
+    //   //   setLoading(false)
+    //   // }
 
-      try {
-        dispatch(productDetailSlice.actions.fetchStart())
-        const { data } = await axios.get(`/v1/touristRoutes/${touristRouteId}`)
-        dispatch(productDetailSlice.actions.fetchSuccess(data))
-      } catch (error: any) {
-        dispatch(productDetailSlice.actions.fetchFail(error.message))
-      }
-    }
+    //   try {
+    //     dispatch(productDetailSlice.actions.fetchStart())
+    //     const { data } = await axios.get(`/v1/touristRoutes/${touristRouteId}`)
+    //     dispatch(productDetailSlice.actions.fetchSuccess(data))
+    //   } catch (error: any) {
+    //     dispatch(productDetailSlice.actions.fetchFail(error.message))
+    //   }
+    // }
 
-    fetchData()
+    // fetchData()
+    dispatch(getProductDetail(touristRouteId))
   }, [])
 
   if (loading) {
