@@ -53,11 +53,11 @@ export const Header = () => {
           </Dropdown.Button>
 
           <Button.Group className={styles["button-group"]}>
-            <Button onClick={() => history.push("register")}>
+            <Button onClick={() => history.push("/register")}>
               {t("header.register")}
             </Button>
 
-            <Button onClick={() => history.push("signIn")}>
+            <Button onClick={() => history.push("/signIn")}>
               {t("header.signin")}
             </Button>
           </Button.Group>
