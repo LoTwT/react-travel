@@ -7,17 +7,68 @@ import {
   ProductCollection,
   BusinessPartners,
 } from "../../components"
-import { Row, Col, Typography } from "antd"
-import { productList1, productList2, productList3 } from "./mockups"
+import { Row, Col, Typography, Spin } from "antd"
 import sideImage from "../../assets/images/sider_2019_12-09.png"
 import sideImage2 from "../../assets/images/sider_2019_02-04.png"
 import sideImage3 from "../../assets/images/sider_2019_02-04-2.png"
 import styles from "./HomePage.module.css"
 import { withTranslation, WithTranslation } from "react-i18next"
+import axios from "axios"
 
-class _HomePage extends React.Component<WithTranslation> {
+interface State {
+  loading: boolean
+  error: string | null
+  productList: any[]
+}
+
+class _HomePage extends React.Component<WithTranslation, State> {
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      loading: true,
+      error: null,
+      productList: [],
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const { data } = await axios.get("/v1/productCollections")
+      this.setState({
+        loading: false,
+        error: null,
+        productList: data,
+      })
+    } catch (error: any) {
+      this.setState({
+        loading: false,
+        error: error.message,
+      })
+    }
+  }
+
   render() {
     const { t } = this.props
+    const { productList, loading, error } = this.state
+
+    if (loading) {
+      return (
+        <Spin
+          size="large"
+          style={{
+            marginTop: 200,
+            marginBottom: 200,
+            marginLeft: "auto",
+            marginRight: "auto",
+            width: "100%",
+          }}
+        />
+      )
+    }
+
+    if (error) {
+      return <div>网站出错: {error}</div>
+    }
 
     return (
       <>
@@ -41,7 +92,7 @@ class _HomePage extends React.Component<WithTranslation> {
               </Typography.Title>
             }
             sideImage={sideImage}
-            products={productList1}
+            products={productList[0].touristRoutes}
           />
 
           <ProductCollection
@@ -51,7 +102,7 @@ class _HomePage extends React.Component<WithTranslation> {
               </Typography.Title>
             }
             sideImage={sideImage2}
-            products={productList2}
+            products={productList[1].touristRoutes}
           />
 
           <ProductCollection
@@ -61,7 +112,7 @@ class _HomePage extends React.Component<WithTranslation> {
               </Typography.Title>
             }
             sideImage={sideImage3}
-            products={productList3}
+            products={productList[2].touristRoutes}
           />
 
           <BusinessPartners />
