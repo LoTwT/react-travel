@@ -2,11 +2,12 @@ import { useEffect } from "react"
 import { useParams, useLocation } from "react-router-dom"
 
 import styles from "./Search.module.css"
-import { Header, Footer, FilterArea, ProductList } from "../../components"
+import { FilterArea, ProductList } from "../../components"
 import { Spin } from "antd"
 import { searchProduct } from "../../redux/productSearch/slice"
 import { useSelector } from "../../redux/hooks"
 import { useDispatch } from "react-redux"
+import { MainLayout } from "../../layouts/mainLayout"
 
 interface MatchParams {
   keywords: string
@@ -55,9 +56,7 @@ export const Search: React.FC = () => {
 
   return (
     <>
-      <Header />
-
-      <div className={styles["page-content"]}>
+      <MainLayout>
         {/* 分类过滤器 */}
         <div className={styles["product-list-container"]}>
           <FilterArea />
@@ -71,9 +70,7 @@ export const Search: React.FC = () => {
             onPageChange={onPageChange}
           />
         </div>
-      </div>
-
-      <Footer />
+      </MainLayout>
     </>
   )
 }

@@ -1,7 +1,5 @@
 import React from "react"
 import {
-  Header,
-  Footer,
   Carousel,
   SideMenu,
   ProductCollection,
@@ -11,11 +9,11 @@ import { Row, Col, Typography, Spin } from "antd"
 import sideImage from "../../assets/images/sider_2019_12-09.png"
 import sideImage2 from "../../assets/images/sider_2019_02-04.png"
 import sideImage3 from "../../assets/images/sider_2019_02-04-2.png"
-import styles from "./HomePage.module.css"
 import { withTranslation, WithTranslation } from "react-i18next"
 import { connect } from "react-redux"
 import { RootState } from "../../redux/store"
 import { giveMeDataActionCreator } from "../../redux/recommendProducts/recommendProductsActions"
+import { MainLayout } from "../../layouts/mainLayout"
 
 type PropsType = WithTranslation &
   ReturnType<typeof mapStateToProps> &
@@ -51,9 +49,7 @@ class _HomePage extends React.Component<PropsType> {
 
     return (
       <>
-        <Header />
-
-        <div className={styles["page-content"]}>
+        <MainLayout>
           <Row style={{ marginTop: 20 }}>
             <Col span={6}>
               <SideMenu />
@@ -95,9 +91,7 @@ class _HomePage extends React.Component<PropsType> {
           />
 
           <BusinessPartners />
-        </div>
-
-        <Footer />
+        </MainLayout>
       </>
     )
   }

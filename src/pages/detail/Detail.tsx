@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { RouteComponentProps, useParams } from "react-router-dom"
 
-import axios from "axios"
 import {
   Spin,
   Row,
@@ -13,7 +12,7 @@ import {
   Menu,
 } from "antd"
 import styles from "./Detail.module.css"
-import { Header, Footer, ProductIntro, ProductComments } from "../../components"
+import { ProductIntro, ProductComments } from "../../components"
 import { commentMockData } from "./mockup"
 import {
   productDetailSlice,
@@ -21,6 +20,7 @@ import {
 } from "../../redux/productDetail/slice"
 import { useSelector } from "../../redux/hooks"
 import { useDispatch } from "react-redux"
+import { MainLayout } from "../../layouts/mainLayout"
 
 const { RangePicker } = DatePicker
 interface MatchParams {
@@ -85,9 +85,7 @@ export const Detail: React.FC<RouteComponentProps<MatchParams>> = (props) => {
 
   return (
     <>
-      <Header />
-
-      <div className={styles["page-content"]}>
+      <MainLayout>
         {/* 产品简介 与 日期选择 */}
         <div className={styles["product-intro-container"]}>
           <Row>
@@ -173,9 +171,7 @@ export const Detail: React.FC<RouteComponentProps<MatchParams>> = (props) => {
             <ProductComments data={commentMockData} />
           </div>
         </div>
-      </div>
-
-      <Footer />
+      </MainLayout>
     </>
   )
 }
