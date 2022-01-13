@@ -7,8 +7,12 @@ import logo from "../../assets/logo.svg"
 import { Layout, Typography, Input, Menu, Button, Dropdown } from "antd"
 import { GlobalOutlined } from "@ant-design/icons"
 import store from "../../redux/store"
-import { LanguageState } from "../../redux/languageReducer"
+import { LanguageState } from "../../redux/language/languageReducer"
 import { withTranslation, WithTranslation } from "react-i18next"
+import {
+  addLanguageActionCreator,
+  changeLanguageActionCreator,
+} from "../../redux/language/languageActions"
 
 interface State extends LanguageState {}
 
@@ -36,18 +40,10 @@ class HeaderComponent extends React.Component<
 
   menuClickHandler = (e: any) => {
     if (e.key === "new") {
-      const action = {
-        type: "add_language",
-        payload: { code: "new_language", name: "新语言" },
-      }
-
+      const action = addLanguageActionCreator("新语言", "new_language")
       store.dispatch(action)
     } else {
-      const action = {
-        type: "change_language",
-        payload: e.key,
-      }
-
+      const action = changeLanguageActionCreator(e.key)
       store.dispatch(action)
     }
   }
