@@ -7,9 +7,11 @@ specifiers:
   "@types/react-router-dom": ^5.3.2
   "@vitejs/plugin-react": ^1.1.4
   antd: ^4.18.3
+  i18next: ^21.6.6
   prettier: ^2.5.1
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-i18next: ^11.15.3
   react-router-dom: 5.3.0
   redux: ^4.1.2
   typescript: ^4.5.4
@@ -19,8 +21,10 @@ specifiers:
 dependencies:
   "@ant-design/icons": 4.7.0_react-dom@17.0.2+react@17.0.2
   antd: 4.18.3_react-dom@17.0.2+react@17.0.2
+  i18next: 21.6.6
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-i18next: 11.15.3_bc514be083f1f06b28df24d5713fc600
   react-router-dom: 5.3.0_react@17.0.2
   redux: 4.1.2
 
@@ -1449,6 +1453,34 @@ packages:
       react-is: 16.13.1
     dev: false
 
+  /html-escaper/2.0.2:
+    resolution:
+      {
+        integrity: sha1-39YAJ9o2o238viNiYsAKWCJoFFM=,
+        tarball: html-escaper/download/html-escaper-2.0.2.tgz,
+      }
+    dev: false
+
+  /html-parse-stringify/3.0.1:
+    resolution:
+      {
+        integrity: sha1-38EBc0fOn3fIFBpQfyMwQMWcVdI=,
+        tarball: html-parse-stringify/download/html-parse-stringify-3.0.1.tgz,
+      }
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
+  /i18next/21.6.6:
+    resolution:
+      {
+        integrity: sha512-K1Pw8K+nHVco56PO6UrqNq4K/ZVbb2eqBQwPqmzYDm4tGQYXBjdz8jrnvuNvV5STaE8oGpWKQMxHOvh2zhVE7Q==,
+        tarball: i18next/download/i18next-21.6.6.tgz,
+      }
+    dependencies:
+      "@babel/runtime": 7.16.7
+    dev: false
+
   /iconv-lite/0.4.24:
     resolution:
       {
@@ -1744,7 +1776,7 @@ packages:
     resolution:
       {
         integrity: sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=,
-        tarball: mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1636370946189&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fmime%2Fdownload%2Fmime-1.6.0.tgz,
+        tarball: mime/download/mime-1.6.0.tgz,
       }
     engines: { node: ">=4" }
     hasBin: true
@@ -2717,6 +2749,31 @@ packages:
       scheduler: 0.20.2
     dev: false
 
+  /react-i18next/11.15.3_bc514be083f1f06b28df24d5713fc600:
+    resolution:
+      {
+        integrity: sha512-RSUEM4So3Tu2JHV0JsZ5Yje+4nz66YViMfPZoywxOy0xyn3L7tE2CHvJ7Y9LUsrTU7vGmZ5bwb8PpjnkatdIxg==,
+        tarball: react-i18next/download/react-i18next-11.15.3.tgz,
+      }
+    peerDependencies:
+      i18next: ">= 19.0.0"
+      react: ">= 16.8.0"
+      react-dom: "*"
+      react-native: "*"
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      "@babel/runtime": 7.16.7
+      html-escaper: 2.0.2
+      html-parse-stringify: 3.0.1
+      i18next: 21.6.6
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
   /react-is/16.13.1:
     resolution:
       {
@@ -3006,7 +3063,7 @@ packages:
     resolution:
       {
         integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=,
-        tarball: source-map/download/source-map-0.6.1.tgz,
+        tarball: source-map/download/source-map-0.6.1.tgz?cache=0&sync_timestamp=1632822727980&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsource-map%2Fdownload%2Fsource-map-0.6.1.tgz,
       }
     engines: { node: ">=0.10.0" }
     dev: true
@@ -3221,6 +3278,15 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /void-elements/3.1.0:
+    resolution:
+      {
+        integrity: sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=,
+        tarball: void-elements/download/void-elements-3.1.0.tgz,
+      }
+    engines: { node: ">=0.10.0" }
+    dev: false
 
   /wrappy/1.0.2:
     resolution:
