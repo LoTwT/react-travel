@@ -4,6 +4,7 @@ specifiers:
   "@ant-design/icons": ^4.7.0
   "@types/react": ^17.0.38
   "@types/react-dom": ^17.0.11
+  "@types/react-redux": ^7.1.22
   "@types/react-router-dom": ^5.3.2
   "@vitejs/plugin-react": ^1.1.4
   antd: ^4.18.3
@@ -12,6 +13,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-i18next: ^11.15.3
+  react-redux: ^7.2.6
   react-router-dom: 5.3.0
   redux: ^4.1.2
   typescript: ^4.5.4
@@ -25,12 +27,14 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-i18next: 11.15.3_bc514be083f1f06b28df24d5713fc600
+  react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
   react-router-dom: 5.3.0_react@17.0.2
   redux: 4.1.2
 
 devDependencies:
   "@types/react": 17.0.38
   "@types/react-dom": 17.0.11
+  "@types/react-redux": 7.1.22
   "@types/react-router-dom": 5.3.2
   "@vitejs/plugin-react": 1.1.4
   prettier: 2.5.1
@@ -429,7 +433,6 @@ packages:
     engines: { node: ">=6.9.0" }
     dependencies:
       regenerator-runtime: 0.13.9
-    dev: false
 
   /@babel/template/7.16.7:
     resolution:
@@ -507,6 +510,16 @@ packages:
       }
     dev: true
 
+  /@types/hoist-non-react-statics/3.3.1:
+    resolution:
+      {
+        integrity: sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=,
+        tarball: "@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz",
+      }
+    dependencies:
+      "@types/react": 17.0.38
+      hoist-non-react-statics: 3.3.2
+
   /@types/json5/0.0.29:
     resolution:
       {
@@ -521,7 +534,6 @@ packages:
         integrity: sha1-/PcgXCXf95Xuea8eMNosl5CAjxE=,
         tarball: "@types/prop-types/download/@types/prop-types-15.7.4.tgz",
       }
-    dev: true
 
   /@types/react-dom/17.0.11:
     resolution:
@@ -532,6 +544,18 @@ packages:
     dependencies:
       "@types/react": 17.0.38
     dev: true
+
+  /@types/react-redux/7.1.22:
+    resolution:
+      {
+        integrity: sha512-GxIA1kM7ClU73I6wg9IRTVwSO9GS+SAKZKe0Enj+82HMU6aoESFU2HNAdNi3+J53IaOHPiUfT3kSG4L828joDQ==,
+        tarball: "@types/react-redux/download/@types/react-redux-7.1.22.tgz",
+      }
+    dependencies:
+      "@types/hoist-non-react-statics": 3.3.1
+      "@types/react": 17.0.38
+      hoist-non-react-statics: 3.3.2
+      redux: 4.1.2
 
   /@types/react-router-dom/5.3.2:
     resolution:
@@ -566,7 +590,6 @@ packages:
       "@types/prop-types": 15.7.4
       "@types/scheduler": 0.16.2
       csstype: 3.0.10
-    dev: true
 
   /@types/scheduler/0.16.2:
     resolution:
@@ -574,7 +597,6 @@ packages:
         integrity: sha1-GmL4lSVyPd4kuhsBsJK/XfitTTk=,
         tarball: "@types/scheduler/download/@types/scheduler-0.16.2.tgz",
       }
-    dev: true
 
   /@vitejs/plugin-react/1.1.4:
     resolution:
@@ -927,7 +949,6 @@ packages:
         integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==,
         tarball: csstype/download/csstype-3.0.10.tgz?cache=0&sync_timestamp=1637224867418&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2Fdownload%2Fcsstype-3.0.10.tgz,
       }
-    dev: true
 
   /date-fns/2.28.0:
     resolution:
@@ -1451,7 +1472,6 @@ packages:
       }
     dependencies:
       react-is: 16.13.1
-    dev: false
 
   /html-escaper/2.0.2:
     resolution:
@@ -1776,7 +1796,7 @@ packages:
     resolution:
       {
         integrity: sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=,
-        tarball: mime/download/mime-1.6.0.tgz,
+        tarball: mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1636370946189&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fmime%2Fdownload%2Fmime-1.6.0.tgz,
       }
     engines: { node: ">=4" }
     hasBin: true
@@ -2780,6 +2800,39 @@ packages:
         integrity: sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=,
         tarball: react-is/download/react-is-16.13.1.tgz,
       }
+
+  /react-is/17.0.2:
+    resolution:
+      {
+        integrity: sha1-5pHUqOnHiTZWVVOas3J2Kw77VPA=,
+        tarball: react-is/download/react-is-17.0.2.tgz,
+      }
+    dev: false
+
+  /react-redux/7.2.6_react-dom@17.0.2+react@17.0.2:
+    resolution:
+      {
+        integrity: sha512-10RPdsz0UUrRL1NZE0ejTkucnclYSgXp5q+tB5SWx2qeG2ZJQJyymgAhwKy73yiL/13btfB6fPr+rgbMAaZIAQ==,
+        tarball: react-redux/download/react-redux-7.2.6.tgz,
+      }
+    peerDependencies:
+      react: ^16.8.3 || ^17
+      react-dom: "*"
+      react-native: "*"
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      "@babel/runtime": 7.16.7
+      "@types/react-redux": 7.1.22
+      hoist-non-react-statics: 3.3.2
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 17.0.2
     dev: false
 
   /react-refresh/0.11.0:
@@ -2863,7 +2916,6 @@ packages:
       }
     dependencies:
       "@babel/runtime": 7.16.7
-    dev: false
 
   /regenerator-runtime/0.13.9:
     resolution:
@@ -2871,7 +2923,6 @@ packages:
         integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==,
         tarball: regenerator-runtime/download/regenerator-runtime-0.13.9.tgz,
       }
-    dev: false
 
   /reserved-words/0.1.2:
     resolution:
@@ -3063,7 +3114,7 @@ packages:
     resolution:
       {
         integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=,
-        tarball: source-map/download/source-map-0.6.1.tgz?cache=0&sync_timestamp=1632822727980&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsource-map%2Fdownload%2Fsource-map-0.6.1.tgz,
+        tarball: source-map/download/source-map-0.6.1.tgz,
       }
     engines: { node: ">=0.10.0" }
     dev: true
