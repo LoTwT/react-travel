@@ -14,42 +14,33 @@ import sideImage3 from "../../assets/images/sider_2019_02-04-2.png"
 import styles from "./HomePage.module.css"
 import { withTranslation, WithTranslation } from "react-i18next"
 import axios from "axios"
+import { connect } from "react-redux"
+import { RootState } from "../../redux/store"
+import { Dispatch } from "redux"
+import {
+  fetchRecommendProductsFailActionCreator,
+  fetchRecommendProductsStartActionCreator,
+  fetchRecommendProductsSuccessActionCreator,
+} from "../../redux/recommendProducts/recommendProductsActions"
 
-interface State {
-  loading: boolean
-  error: string | null
-  productList: any[]
-}
+type PropsType = WithTranslation &
+  ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapActionToProps>
 
-class _HomePage extends React.Component<WithTranslation, State> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      loading: true,
-      error: null,
-      productList: [],
-    }
-  }
-
+class _HomePage extends React.Component<PropsType> {
   async componentDidMount() {
     try {
+      this.props.fetchStart()
       const { data } = await axios.get("/v1/productCollections")
-      this.setState({
-        loading: false,
-        error: null,
-        productList: data,
-      })
+      this.props.fetchSuccess(data)
     } catch (error: any) {
-      this.setState({
-        loading: false,
-        error: error.message,
-      })
+      this.props.fetchFail(error.message)
     }
   }
 
   render() {
     const { t } = this.props
-    const { productList, loading, error } = this.state
+    const { productList, loading, error } = this.props
 
     if (loading) {
       return (
@@ -124,4 +115,21 @@ class _HomePage extends React.Component<WithTranslation, State> {
   }
 }
 
-export const HomePage = withTranslation()(_HomePage)
+const mapStateToProps = (state: RootState) => ({
+  loading: state.recommendProducts.loading,
+  error: state.recommendProducts.error,
+  productList: state.recommendProducts.productList,
+})
+
+const mapActionToProps = (dispatch: Dispatch) => ({
+  fetchStart: () => dispatch(fetchRecommendProductsStartActionCreator()),
+  fetchSuccess: (data: any) =>
+    dispatch(fetchRecommendProductsSuccessActionCreator(data)),
+  fetchFail: (error: any) =>
+    dispatch(fetchRecommendProductsFailActionCreator(error)),
+})
+
+export const HomePage = connect(
+  mapStateToProps,
+  mapActionToProps,
+)(withTranslation()(_HomePage))
