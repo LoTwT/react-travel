@@ -11,6 +11,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-router-dom: 5.3.0
+  redux: ^4.1.2
   typescript: ^4.5.4
   typescript-plugin-css-modules: ^3.4.0
   vite: ^2.7.10
@@ -21,6 +22,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-router-dom: 5.3.0_react@17.0.2
+  redux: 4.1.2
 
 devDependencies:
   "@types/react": 17.0.38
@@ -2795,6 +2797,16 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /redux/4.1.2:
+    resolution:
+      {
+        integrity: sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw==,
+        tarball: redux/download/redux-4.1.2.tgz,
+      }
+    dependencies:
+      "@babel/runtime": 7.16.7
+    dev: false
 
   /regenerator-runtime/0.13.9:
     resolution:
