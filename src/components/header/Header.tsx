@@ -82,7 +82,9 @@ export const Header = () => {
                 <Typography.Text strong>{username}</Typography.Text>
               </span>
 
-              <Button>{t("header.shoppingCart")}</Button>
+              <Button onClick={() => history.push("/shoppingCart")}>
+                {t("header.shoppingCart")}
+              </Button>
               <Button onClick={onLogOut}>{t("header.signOut")}</Button>
             </Button.Group>
           ) : (
