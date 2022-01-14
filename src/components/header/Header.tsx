@@ -51,7 +51,6 @@ export const Header = () => {
   const onLogOut = () => {
     dispatch(userSlice.actions.logOut())
     history.push("/")
-    window.location.reload() // 可加可不加
   }
 
   return (
