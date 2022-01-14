@@ -11,6 +11,7 @@ export default defineConfig((config) => {
 
   return {
     plugins: [react()],
+    base: "./",
     server: VITE_API_PROXY && {
       proxy: {
         "/v1": {
