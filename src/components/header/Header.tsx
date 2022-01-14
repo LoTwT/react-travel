@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 
 import styles from "./Header.module.css"
@@ -12,6 +13,12 @@ import {
   changeLanguageActionCreator,
 } from "../../redux/language/languageActions"
 import { useTranslation } from "react-i18next"
+import jwtDecode, { JwtPayload as DefaultJwtPayload } from "jwt-decode"
+import { userSlice } from "../../redux/user/slice"
+
+interface JwtPayload extends DefaultJwtPayload {
+  username: string
+}
 
 export const Header = () => {
   const history = useHistory()
@@ -20,6 +27,17 @@ export const Header = () => {
 
   const language = useSelector((state) => state.language.language)
   const languageList = useSelector((state) => state.language.languageList)
+
+  const { token: jwt } = useSelector((state) => state.user)
+  const [username, setUsername] = useState("")
+
+  useEffect(() => {
+    if (jwt) {
+      const token = jwtDecode<JwtPayload>(jwt)
+      setUsername(token.username)
+    }
+  }, [jwt])
+
   const dispatch = useDispatch()
 
   const menuClickHandler = (e: any) => {
@@ -28,6 +46,12 @@ export const Header = () => {
     } else {
       dispatch(changeLanguageActionCreator(e.key))
     }
+  }
+
+  const onLogOut = () => {
+    dispatch(userSlice.actions.logOut())
+    history.push("/")
+    window.location.reload() // 可加可不加
   }
 
   return (
@@ -52,15 +76,27 @@ export const Header = () => {
             {language === "zh" ? "中文" : "English"}
           </Dropdown.Button>
 
-          <Button.Group className={styles["button-group"]}>
-            <Button onClick={() => history.push("/register")}>
-              {t("header.register")}
-            </Button>
+          {jwt ? (
+            <Button.Group className={styles["button-group"]}>
+              <span>
+                {t("header.welcome")}
+                <Typography.Text strong>{username}</Typography.Text>
+              </span>
 
-            <Button onClick={() => history.push("/signIn")}>
-              {t("header.signin")}
-            </Button>
-          </Button.Group>
+              <Button>{t("header.shoppingCart")}</Button>
+              <Button onClick={onLogOut}>{t("header.signOut")}</Button>
+            </Button.Group>
+          ) : (
+            <Button.Group className={styles["button-group"]}>
+              <Button onClick={() => history.push("/register")}>
+                {t("header.register")}
+              </Button>
+
+              <Button onClick={() => history.push("/signIn")}>
+                {t("header.signin")}
+              </Button>
+            </Button.Group>
+          )}
         </div>
       </div>
 
