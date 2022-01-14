@@ -31,6 +31,9 @@ export const Header = () => {
   const { token: jwt } = useSelector((state) => state.user)
   const [username, setUsername] = useState("")
 
+  const { loading: shoppingCartLoading, items: shoppingCartItems } =
+    useSelector((state) => state.shoppingCart)
+
   useEffect(() => {
     if (jwt) {
       const token = jwtDecode<JwtPayload>(jwt)
@@ -82,8 +85,11 @@ export const Header = () => {
                 <Typography.Text strong>{username}</Typography.Text>
               </span>
 
-              <Button onClick={() => history.push("/shoppingCart")}>
-                {t("header.shoppingCart")}
+              <Button
+                loading={shoppingCartLoading}
+                onClick={() => history.push("/shoppingCart")}
+              >
+                {t("header.shoppingCart")}({shoppingCartItems.length})
               </Button>
               <Button onClick={onLogOut}>{t("header.signOut")}</Button>
             </Button.Group>

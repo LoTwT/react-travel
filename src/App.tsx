@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styles from "./App.module.css"
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
@@ -11,6 +11,8 @@ import {
   ShoppingCart,
 } from "./pages"
 import { useSelector } from "./redux/hooks"
+import { useDispatch } from "react-redux"
+import { getShoppingCart } from "./redux/shoppingCart/slice"
 
 const PrivateRoute = ({
   component,
@@ -33,6 +35,13 @@ const PrivateRoute = ({
 
 function App() {
   const { token: jwt } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getShoppingCart(jwt))
+    }
+  }, [jwt])
 
   return (
     <div className={styles.App}>

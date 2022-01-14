@@ -20,8 +20,8 @@ interface Product {
 }
 interface PropsType {
   data: Product[]
-  paging: any
-  onPageChange?: (nextPage, pageSize) => void
+  paging?: any
+  onPageChange?: (nextPage: any, pageSize: any) => void
 }
 
 const listData = (productList: Product[]) =>
@@ -44,7 +44,7 @@ const listData = (productList: Product[]) =>
     rating: p.rating,
   }))
 
-const IconText = ({ icon, text }) => (
+const IconText = ({ icon, text }: { icon: any; text: any }) => (
   <Space>
     {React.createElement(icon)}
     {text}
@@ -61,17 +61,24 @@ export const ProductList: React.FC<PropsType> = ({
     <List
       itemLayout="vertical"
       size="large"
-      pagination={{
-        current: paging.currentPage,
-        onChange: (page) => onPageChange && onPageChange(page, paging.pageSize),
-        pageSize: paging.pageSize,
-        total: paging.totalCount,
-      }}
+      pagination={
+        paging
+          ? {
+              current: paging.currentPage,
+              onChange: (page) =>
+                onPageChange && onPageChange(page, paging.pageSize),
+              pageSize: paging.pageSize,
+              total: paging.totalCount,
+            }
+          : false
+      }
       dataSource={products}
       footer={
-        <div>
-          搜索总路线: <Text strong>{paging.totalCount}</Text> 条
-        </div>
+        paging && (
+          <div>
+            搜索总路线: <Text strong>{paging.totalCount}</Text> 条
+          </div>
+        )
       }
       renderItem={(item) => (
         <List.Item
